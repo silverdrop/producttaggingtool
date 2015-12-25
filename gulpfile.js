@@ -1,6 +1,7 @@
 // Include gulp
 var gulp = require('gulp'),
     connect = require('gulp-connect'),
+    open = require('gulp-open'),
     rename = require('gulp-rename'),
     minifyCSS = require('gulp-minify-css'),
     uglify = require('gulp-uglify'),
@@ -28,6 +29,7 @@ gulp.task('build', function(cb) {
 
     cb();
 });
+
 gulp.task('dist', ['build'], function(cb) {
     gulp.src(path.build + '*.css')
         .pipe(minifyCSS())
@@ -52,12 +54,26 @@ gulp.task('dist', ['build'], function(cb) {
 gulp.task('connect', function () {
     return connect.server({
         root: [ path.root ],
+        livereload: true,
         port:'3000'
     });
 });
+    
+gulp.task('open', function () {
+    return gulp.src('demo/index.html').pipe(open({ uri: 'http://localhost:3000/demo/index.html'}));
+});
 
-// Watch Files For Changes
 gulp.task('watch', function() {
     gulp.watch(path.source + '*/*.*', ['build']);
 });
-gulp.task('default', ['connect', 'build', 'watch']);
+
+gulp.task('watch-demo', function() {
+    gulp.watch(path.source + '*/*.*', ['build']);
+    gulp.watch(path.source + '*/*.*', function(){
+        gulp.src(path.root)
+            .pipe(connect.reload());
+    });  
+});
+
+gulp.task('default', ['build', 'watch']);
+gulp.task('demo', ['connect', 'build', 'watch-demo', 'open']);

@@ -1,5 +1,6 @@
 // Include gulp
 var gulp = require('gulp'),
+    connect = require('gulp-connect'),
     rename = require('gulp-rename'),
     minifyCSS = require('gulp-minify-css'),
     uglify = require('gulp-uglify'),
@@ -48,8 +49,15 @@ gulp.task('dist', ['build'], function(cb) {
     cb();
 });
 
+gulp.task('connect', function () {
+    return connect.server({
+        root: [ path.root ],
+        port:'3000'
+    });
+});
+
 // Watch Files For Changes
 gulp.task('watch', function() {
     gulp.watch(path.source + '*/*.*', ['build']);
 });
-gulp.task('default', ['build', 'watch']);
+gulp.task('default', ['connect', 'build', 'watch']);

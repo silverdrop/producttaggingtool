@@ -27,6 +27,9 @@ gulp.task('build', function(cb) {
     gulp.src(path.source + 'img/*.*')
         .pipe(gulp.dest(path.build + 'img/'));
 
+    gulp.src(path.source + 'font/*.*')
+        .pipe(gulp.dest(path.build + 'font/'));
+
     cb();
 });
 
@@ -47,6 +50,9 @@ gulp.task('dist', ['build'], function(cb) {
         
     gulp.src(path.build + 'img/*.*')
         .pipe(gulp.dest(path.dest + 'img/'));
+        
+    gulp.src(path.build + 'font/*.*')
+        .pipe(gulp.dest(path.dest + 'font/'));
 
     cb();
 });

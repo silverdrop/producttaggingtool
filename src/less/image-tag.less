@@ -1,0 +1,131 @@
+.box-shadow(@x) {
+	-moz-box-shadow: @x;
+	-webkit-box-shadow: @x;
+	box-shadow: @x;
+}
+
+.image-tag-container {
+	position: relative;
+
+	.image-tag {
+		display: none;
+		position: absolute;
+		width: 20px;
+		height: 20px;
+		cursor: pointer;
+		background: transparent url("img/plus.png") no-repeat scroll 0% 0% / cover;
+		z-index: 100;
+		.tag-modal {
+			display: none;
+			width: 232.5px;
+			height: 138px;
+			cursor: initial;
+			float: left;
+			margin-top: 15px;
+			margin-left: 15px;
+			background-color: #FFF;
+			.box-shadow(1.5px 1.5px 1.5px rgba(51, 51, 51, 0.5));
+
+			.tag-image {
+				position: relative;
+			    display: inline-block;
+			    background: transparent no-repeat scroll 0% 0% / cover;
+			    margin: 5.25px;
+			    width: 94.5px;
+			    height: 127.5px;
+			    float: left;
+			}
+			.tag-content {
+				text-align: left;
+			    display: inline-block;
+			    width: 112.5px;
+			    margin-left: 7.5px;
+			    h1.tag-title {
+			    	font-family: Montserrat;
+			    	font-weight: 400;
+				    font-size: 15px;
+				    letter-spacing: -0.75px;
+				    margin: 5px 0 10px;
+				    padding: 0;
+				    line-height: 1em;
+				    color: #000;
+				    text-transform: none;
+			    }
+			    span.tag-product-name {
+			    	font-family: Montserrat;
+			    	font-weight: 300;
+				    font-size: 11.25px;
+				    letter-spacing: -0.75px;
+				    opacity: 0.8;
+				    display: block;
+				    margin: 0;
+				    padding: 0;
+				    line-height: 1.3em;
+				    text-transform: none;
+				    color: #000;
+			    }
+			    h2.tag-product-price {
+			    	font-family: Montserrat;
+			    	font-weight: 400;
+				    font-size: 13.5px;
+				    letter-spacing: -0.75px;
+				    margin: 10px 0 0;
+				    padding: 0 0 3px;
+				    line-height: 1em;
+				    color: #000;
+			    }
+			    a.tag-product-link {
+			    	font-family: Montserrat;
+			    	font-weight: 300;
+				    font-size: 9px;
+				    letter-spacing: -0.5px;
+				    opacity: 0.8;
+				    color: #95A5A6;
+    				text-decoration: none;
+    				cursor: pointer;
+    				padding: 0;
+    				margin: 0;
+				    line-height: 1em;
+				    display: block;
+				    border: 0;
+				    text-transform: none;
+			    }
+			    .buy-btn-container {
+			    	text-align: center;
+    				margin-top: 15px;
+    				.buy-btn {
+			    		font-family: Montserrat;
+			    		font-weight: 400;
+					    font-size: 9px;
+					    text-transform: uppercase;
+					    line-height: 1.3em;
+    					background-color: #ECF0F1;
+					    border-radius: 2.25px;
+					    display: block;
+					    cursor: pointer;
+					    color: #2C3E50;
+					    padding: 6px 0;
+					    margin: 1.25px 0px 0px;
+					    text-decoration: none;
+					    border: 0px solid #2C3E50;
+				    	width: 100%;
+					    &:hover {
+					    	background-color: #34495E;
+    						color: #ECF0F1;
+					    }
+    				}
+			    }
+			}
+		}
+		&:hover {
+			background-image: url("img/plus_hover.png");
+			z-index: 101;
+			.tag-modal {
+				display: block;
+			}
+		}
+	}
+	&:hover .image-tag {
+		display: block;
+	}
+}

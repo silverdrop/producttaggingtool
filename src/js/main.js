@@ -107,13 +107,14 @@ $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', 'h
 					break;
 				case 2:
 					$container.addClass("image-tag-second");
+					$container.append('<div class="link_area"><div class="demo_icon"></div><span class="link_area_text">FIND SIMILAR LOOK</span><span class="up_down_icon">▾</span></div>');
 					var $sliderContainer = $("<div class='tags-slider-container'><a class='buttons tt-buttons prev'>prev</a><div class='viewport'><ul class='overview'></ul></div><a class='buttons tt-buttons next'>next</a></div>"),
 						$slidelist = $sliderContainer.find("ul");
 
 					$container.append($sliderContainer);
 
 					self.options.tags.map(function(tag) {
-						var $tag_div = $("<li class='image-tag'></div>");
+						var $tag_div = $("<li class='image-tag' style='width:242.5px;'></li>");
 						$tag_div.append(product_template.clone());
 						$tag_div.find(".tt-product-image").css("background-image", "url("+tag.image_url+")");
 						$tag_div.find(".tt-product-title").html("Buy it!");
@@ -123,6 +124,7 @@ $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', 'h
 						$tag_div.find(".tt-product-btn-container .tt-product-btn").html("Add to cart").attr('href',tag.cart_url);
 						$slidelist.append($tag_div);
 					});
+					console.log($sliderContainer.find("li:first-child").outerWidth());
 					$sliderContainer.tinycarousel({});
 					break;
 			}

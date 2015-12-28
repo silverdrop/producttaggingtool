@@ -300,11 +300,20 @@
 }
 .image-tag-container.image-tag-third .tt-pointer {
   position: absolute;
+  display: none;
+}
+.image-tag-container.image-tag-third:hover .tt-pointer {
+  display: block;
 }
 .image-tag-container.image-tag-third .tags-slider-container {
+  opacity: 0;
   -moz-box-shadow: 1.5px 1.5px 1.5px rgba(51, 51, 51, 0.5);
   -webkit-box-shadow: 1.5px 1.5px 1.5px rgba(51, 51, 51, 0.5);
   box-shadow: 1.5px 1.5px 1.5px rgba(51, 51, 51, 0.5);
+  -webkit-transition: all 0.35s linear 0s;
+  -moz-transition: all 0.35s linear 0s;
+  -o-transition: all 0.35s linear 0s;
+  transition: all 0.35s linear 0s;
 }
 .image-tag-container.image-tag-third .tags-slider-container .viewport {
   height: 165px;

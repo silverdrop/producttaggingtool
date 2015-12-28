@@ -276,9 +276,17 @@
 	&.image-tag-third {
 		.tt-pointer {
 			position: absolute;
+			display: none;
+		}
+		&:hover {
+			.tt-pointer {
+				display: block;
+			}
 		}
 		.tags-slider-container {
+			opacity: 0;
 			.box-shadow(1.5px 1.5px 1.5px rgba(51, 51, 51, 0.5));
+		    .transition(all 0.35s linear 0s);
 			.viewport {
 		    	height: 165px;
 				ul.overview {

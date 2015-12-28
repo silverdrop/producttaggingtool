@@ -142,7 +142,7 @@ $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', 'h
 					$container.append($sliderContainer);
 					$container.append($pointersContainer);
 
-					self.options.tags.map(function(tag) {
+					self.options.tags.map(function(tag, index) {
 						var $tag_div = $("<li class='image-tag'></li>");
 						$tag_div.append(product_template.clone());
 						$tag_div.find(".tt-product-image").css("background-image", "url("+tag.image_url+")");
@@ -152,13 +152,32 @@ $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', 'h
 						$tag_div.find(".tt-product-btn-container .tt-product-btn").html("Shop").attr('href',tag.cart_url);
 						$slidelist.append($tag_div);
 
-						var $tag_pointer = $("<div class='tt-pointer'></div>");
+						var $tag_pointer = $("<div class='tt-pointer' data-id='"+index+"'></div>");
 						$tag_pointer.css('left', tag.x);
 						$tag_pointer.css('top', tag.y);
 						$pointersContainer.append($tag_pointer);
 					});
 					$sliderContainer.find("li").css('width', $sliderContainer.width());
-					$sliderContainer.tinycarousel({});
+					var slider = $sliderContainer.tinycarousel().data("plugin_tinycarousel");
+
+					$pointersContainer.find(".tt-pointer").hover(function(){
+						slider.move($(this).data('id'));
+						$pointersContainer.find(".tt-pointer").removeClass('active');
+						$(this).addClass('active');
+						$container.addClass('tags-slider-open');
+					}, function(){
+					});
+
+					$sliderContainer.bind("move", function()
+				    {
+						$pointersContainer.find(".tt-pointer").removeClass('active');
+						$pointersContainer.find(".tt-pointer:nth-child("+(slider.slideCurrent+1)+")").addClass('active');
+				    });
+
+				    $container.mouseleave(function(){
+						$(this).removeClass('tags-slider-open');
+						$pointersContainer.find(".tt-pointer").removeClass('active');
+				    });
 					break;
 			}
         }

@@ -162,11 +162,14 @@
 }
 .image-tag-container.image-tag-second .tags-slider-container {
   overflow: hidden;
+  display: block;
   position: absolute;
   width: 100%;
-  bottom: 0;
+  top: 100%;
   margin-top: 5px;
-  display: none;
+  opacity: 0;
+  -webkit-transition: all 0.35s linear 0s;
+  transition: all 0.35s linear 0s;
 }
 .image-tag-container.image-tag-second .tags-slider-container .viewport {
   float: left;
@@ -199,8 +202,8 @@
   border: none;
   z-index: 99;
   opacity: 0.5;
-  -webkit-transition: opacity 0.35s linear 0s;
-  transition: opacity 0.35s linear 0s;
+  -webkit-transition: all 0.35s linear 0s;
+  transition: all 0.35s linear 0s;
 }
 .image-tag-container.image-tag-second .tags-slider-container .tt-buttons:hover {
   opacity: 1;
@@ -213,17 +216,20 @@
   background-position: 39px center;
   right: 10px;
 }
-.image-tag-container.image-tag-second .link_area {
+.image-tag-container.image-tag-second .link-area {
   position: absolute;
+  display: block;
   bottom: 0;
   background: rgba(255, 255, 255, 0.6);
-  display: none;
+  opacity: 0;
   width: 100%;
   height: 35px;
   margin-top: 35px;
   cursor: pointer;
+  -webkit-transition: all 0.35s linear 0s;
+  transition: all 0.35s linear 0s;
 }
-.image-tag-container.image-tag-second .link_area .demo_icon {
+.image-tag-container.image-tag-second .link-area .demo-icon {
   background-repeat: no-repeat;
   background-position: center;
   background-image: url("img/demo_icon.png");
@@ -232,7 +238,7 @@
   height: 100%;
   float: left;
 }
-.image-tag-container.image-tag-second .link_area .link_area_text {
+.image-tag-container.image-tag-second .link-area .link-area-text {
   display: block;
   float: left;
   font-family: Montserrat;
@@ -241,7 +247,7 @@
   color: #000;
   line-height: 35px;
 }
-.image-tag-container.image-tag-second .link_area .up_down_icon {
+.image-tag-container.image-tag-second .link-area .up-down-icon {
   display: block;
   float: right;
   text-align: right;
@@ -251,7 +257,14 @@
   line-height: 35px;
   color: #000;
 }
-.image-tag-container.image-tag-second:hover .link_area {
-  display: block;
+.image-tag-container.image-tag-second:hover .link-area {
+  opacity: 1;
+  margin-top: 0;
+}
+.image-tag-container.image-tag-second.tags-slider-open .tags-slider-container {
+  opacity: 1;
+}
+.image-tag-container.image-tag-second.tags-slider-open .link-area {
+  opacity: 1;
   margin-top: 0;
 }

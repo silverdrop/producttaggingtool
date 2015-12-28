@@ -107,7 +107,7 @@ $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', 'h
 					break;
 				case 2:
 					$container.addClass("image-tag-second");
-					$container.append('<div class="link_area"><div class="demo_icon"></div><span class="link_area_text">FIND SIMILAR LOOK</span><span class="up_down_icon">▾</span></div>');
+					$container.append('<div class="link-area"><div class="demo-icon"></div><span class="link-area-text">FIND SIMILAR LOOK</span><span class="up-down-icon">▾</span></div>');
 					var $sliderContainer = $("<div class='tags-slider-container'><a class='buttons tt-buttons prev'>prev</a><div class='viewport'><ul class='overview'></ul></div><a class='buttons tt-buttons next'>next</a></div>"),
 						$slidelist = $sliderContainer.find("ul");
 
@@ -126,6 +126,9 @@ $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', 'h
 					});
 					console.log($sliderContainer.find("li:first-child").outerWidth());
 					$sliderContainer.tinycarousel({});
+					$container.find(".link-area").click(function(){
+						$container.toggleClass("tags-slider-open");
+					})
 					break;
 			}
         }

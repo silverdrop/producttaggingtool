@@ -80,8 +80,8 @@ $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', 'h
 				"<div class='tt-product-content'>" +
 				"<h1 class='tt-product-title'></h1>" +
 				"<span class='tt-product-name'></span>" +
-				"<h2 class='tt-product-price'></h2>" +
-				"<a class='tt-product-link'></a>" +
+				"<div class='tt-product-price-container'><h2 class='tt-product-price'></h2>" +
+				"<a class='tt-product-link'></a></div>" +
 				"<div class='tt-product-btn-container'><a class='tt-product-btn' target='_blank'></a></div>");
 
 			// Add special classname to image block
@@ -102,6 +102,10 @@ $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', 'h
 						$tag_div.find(".tt-product-btn-container .tt-product-btn").html("Add to cart").attr('href',tag.cart_url);
 						$tag_div.css('left', tag.x);
 						$tag_div.css('top', tag.y);
+
+						var $tag_pointer = $("<div class='tt-pointer'></div>");
+						$tag_div.append($tag_pointer);
+
 						$container.append($tag_div);
 					});
 					break;
@@ -121,14 +125,40 @@ $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', 'h
 						$tag_div.find(".tt-product-name").html(tag.title);
 						$tag_div.find(".tt-product-price").html(tag.price);
 						$tag_div.find(".tt-product-link").html(">> See details");
-						$tag_div.find(".tt-product-btn-container .tt-product-btn").html("Add to cart").attr('href',tag.cart_url);
+						$tag_div.find(".tt-product-btn-container .tt-product-btn").html("Shop").attr('href',tag.cart_url);
 						$slidelist.append($tag_div);
 					});
-					console.log($sliderContainer.find("li:first-child").outerWidth());
 					$sliderContainer.tinycarousel({});
 					$container.find(".link-area").click(function(){
 						$container.toggleClass("tags-slider-open");
 					})
+					break;
+				case 3:
+					$container.addClass("image-tag-third");
+					var $sliderContainer = $("<div class='tags-slider-container'><a class='buttons tt-buttons prev'>prev</a><div class='viewport'><ul class='overview'></ul></div><a class='buttons tt-buttons next'>next</a></div>"),
+						$slidelist = $sliderContainer.find("ul"),
+						$pointersContainer = $("<div class='tags-pointer-container'></div>");
+
+					$container.append($sliderContainer);
+					$container.append($pointersContainer);
+
+					self.options.tags.map(function(tag) {
+						var $tag_div = $("<li class='image-tag'></li>");
+						$tag_div.append(product_template.clone());
+						$tag_div.find(".tt-product-image").css("background-image", "url("+tag.image_url+")");
+						$tag_div.find(".tt-product-name").html(tag.title);
+						$tag_div.find(".tt-product-price").html(tag.price);
+						$tag_div.find(".tt-product-link").html(">> See details");
+						$tag_div.find(".tt-product-btn-container .tt-product-btn").html("Shop").attr('href',tag.cart_url);
+						$slidelist.append($tag_div);
+
+						var $tag_pointer = $("<div class='tt-pointer'></div>");
+						$tag_pointer.css('left', tag.x);
+						$tag_pointer.css('top', tag.y);
+						$pointersContainer.append($tag_pointer);
+					});
+					$sliderContainer.find("li").css('width', $sliderContainer.width());
+					$sliderContainer.tinycarousel({});
 					break;
 			}
         }
@@ -205,6 +235,32 @@ var data = [
 			price: '22.00 €',
 			cart_url: 'www.topman.com/en/tmuk/product/clothing-140502/mens-t-shirts-vests-2925317/plain-t-shirts-140654/premium-white-crew-neck-t-shirt-5018047?bi=40&ps=20'
 		}
+	],
+	[
+		{
+			x: 510,
+			y: 90,
+			image_url: 'http://whitehouse.prod51.fr/op/img/article_third_product1.jpg',
+			title: 'White Wooden Cabinet',
+			price: '319.99 €',
+			cart_url: 'http://www.home24.fr/jack-alice/vitrine-chateau-blanc-imitation-chene-de-san-remo'
+		},
+		{
+			x: 412,
+			y: 452,
+			image_url: 'http://whitehouse.prod51.fr/op/img/article_third_product2.jpg',
+			title: 'White Design Chair',
+			price: '329.00 €',
+			cart_url: 'http://www.home24.fr/m-rteens/chaise-capitonnee-troenoe-lot-de-4-matiere-synthetique-imitation-cuir-blanc'
+		},
+		{
+			x: 230,
+			y: 377,
+			image_url: 'http://whitehouse.prod51.fr/op/img/article_third_product3.jpg',
+			title: 'Pine Table',
+			price: '359.00 €',
+			cart_url: 'http://www.ikea.com/fr/fr/catalog/products/60152340/'
+		}
 	]
 ];
 
@@ -213,4 +269,6 @@ $(document).ready(function(){
 	$("#image1").producttagging({type: 1, tags: data[0]});
 	// Demo - Style2
 	$("#image2").producttagging({type: 2, tags: data[1]});
+	// Demo - Style3
+	$("#image3").producttagging({type: 3, tags: data[2]});
 });

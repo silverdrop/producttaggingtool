@@ -85,7 +85,8 @@ $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', 'h
 				"<div class='tt-product-btn-container'><a class='tt-product-btn' target='_blank'></a></div>");
 
 			// Add special classname to image block
-			$container.addClass("image-tag-container");
+			$container.wrap( "<div class='image-tag-container'></div>" );
+			$container = $container.parent();
 
 			// Add tags to image
 			switch(self.options.type) {
@@ -110,8 +111,9 @@ $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', 'h
 					});
 					break;
 				case 2:
+
 					$container.addClass("image-tag-second");
-					$container.append('<div class="link-area"><div class="demo-icon"></div><span class="link-area-text">FIND SIMILAR LOOK</span><span class="up-down-icon">▾</span></div>');
+					$container.append('<div class="link-area"><div class="demo-icon"></div><span class="link-area-text">FIND SIMILAR LOOK</span><span class="up-down-icon"></span></div>');
 					var $sliderContainer = $("<div class='tags-slider-container'><a class='buttons tt-buttons prev'>prev</a><div class='viewport'><ul class='overview'></ul></div><a class='buttons tt-buttons next'>next</a></div>"),
 						$slidelist = $sliderContainer.find("ul");
 
@@ -125,13 +127,28 @@ $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', 'h
 						$tag_div.find(".tt-product-name").html(tag.title);
 						$tag_div.find(".tt-product-price").html(tag.price);
 						$tag_div.find(".tt-product-link").html(">> See details");
-						$tag_div.find(".tt-product-btn-container .tt-product-btn").html("Shop").attr('href',tag.cart_url);
+						$tag_div.find(".tt-product-btn-container .tt-product-btn").html("Add to cart").attr('href',tag.cart_url);
 						$slidelist.append($tag_div);
 					});
-					$sliderContainer.tinycarousel({});
+
+					var slider = $sliderContainer.tinycarousel({ interval: true, intervalTime: 2000, animationTime: 500 }).data("plugin_tinycarousel");
+					var intervalToggle = false;
+					slider.stop();
 					$container.find(".link-area").click(function(){
 						$container.toggleClass("tags-slider-open");
+						intervalToggle = !intervalToggle;
+						if(intervalToggle) {
+							slider.start();
+						} else {
+							slider.stop();
+						}
 					})
+
+				    $container.mouseleave(function(){
+						$container.removeClass("tags-slider-open");
+						intervalToggle = false;
+						slider.stop();
+				    });
 					break;
 				case 3:
 					$container.addClass("image-tag-third");
@@ -157,15 +174,19 @@ $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', 'h
 						$tag_pointer.css('top', tag.y);
 						$pointersContainer.append($tag_pointer);
 					});
-					$sliderContainer.find("li").css('width', $sliderContainer.width());
-					var slider = $sliderContainer.tinycarousel().data("plugin_tinycarousel");
+					$sliderContainer.find("li").css('width', $container.find(".image").width());
+
+					var slider = $sliderContainer.tinycarousel({ interval: true, intervalTime: 2000, animationTime: 500 }).data("plugin_tinycarousel");
+					slider.stop();
 
 					$pointersContainer.find(".tt-pointer").hover(function(){
 						slider.move($(this).data('id'));
+				    	slider.stop();
 						$pointersContainer.find(".tt-pointer").removeClass('active');
 						$(this).addClass('active');
 						$container.addClass('tags-slider-open');
 					}, function(){
+						slider.start();
 					});
 
 					$sliderContainer.bind("move", function()
@@ -175,6 +196,7 @@ $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', 'h
 				    });
 
 				    $container.mouseleave(function(){
+				    	slider.stop();
 						$(this).removeClass('tags-slider-open');
 						$pointersContainer.find(".tt-pointer").removeClass('active');
 				    });
@@ -250,7 +272,7 @@ var data = [
 		},
 		{
 			image_url: 'http://whitehouse.prod51.fr/op/img/article_second_tag4.jpg',
-			title: 'White Crew Neck T-Shirt',
+			title: 'White Crew Neck Shirt',
 			price: '22.00 €',
 			cart_url: 'www.topman.com/en/tmuk/product/clothing-140502/mens-t-shirts-vests-2925317/plain-t-shirts-140654/premium-white-crew-neck-t-shirt-5018047?bi=40&ps=20'
 		}

@@ -1649,7 +1649,6 @@
 	}
 
 	header.special {
-		margin-bottom: 5em;
 		padding-top: 7em;
 		position: relative;
 		text-align: center;
@@ -1664,6 +1663,7 @@
 			position: absolute;
 			top: 1.75em;
 			width: 50%;
+			display: none;
 		}
 
 		header.special:before {
@@ -2229,7 +2229,7 @@
 				}
 
 				#header nav ul li.current > a {
-					font-weight: 900;
+					color: #000;
 				}
 
 		#header.reveal {
@@ -2427,7 +2427,7 @@
 		background-position: top left, top right, bottom left, bottom right;
 		background-repeat: no-repeat;
 		background-size: 25em;
-		padding: 7em 0;
+		padding: 2em 0;
 	}
 
 		article > :last-child {
@@ -2497,7 +2497,6 @@
 
 			header.special {
 				padding-top: 5.5em;
-				margin-bottom: 4em;
 			}
 
 	}
@@ -3144,10 +3143,8 @@
 
 /* Image */
 
-	.image {
-		border: 0;
-		position: relative;
-		margin: 0 auto;
+	.content {
+		text-align: center;
 	}
 
 /* First Image */
